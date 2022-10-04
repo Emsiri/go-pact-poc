@@ -22,7 +22,5 @@ jobs:
         with:
           node-version: "12"
       - run: docker pull pactfoundation/pact-cli:latest
-      - name: Install
-        run: npm i
       - name: Test
         run: make provider
