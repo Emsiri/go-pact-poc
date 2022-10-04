@@ -23,4 +23,5 @@ jobs:
           node-version: "12"
       - run: docker pull pactfoundation/pact-cli:latest
       - name: Test
+        working-directory: ./provider
         run: make provider

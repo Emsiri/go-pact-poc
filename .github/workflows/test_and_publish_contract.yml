@@ -26,8 +26,11 @@ jobs:
         with:
           node-version: "*"
       - name: Install
+        working-directory: ./consumer
         run: make install
       - name: Test
+        working-directory: ./consumer
         run: make consumer
       - name: Publish pacts
+        working-directory: ./consumer
         run: make publish
