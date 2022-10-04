@@ -1,4 +1,5 @@
 PACTICIPANT="GoUserService"
+PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN  pactfoundation/pact-cli"
 
 install:
 	@if [ ! -d pact/bin ]; then\
@@ -9,9 +10,9 @@ install:
 run-consumer:
 	@go run client/cmd/main.go
 
-deploy-consumer: install
+deploy-consumer:
 	@echo "--- ✅ Checking if we can deploy consumer"
-	@pact-broker can-i-deploy \
+	@"${PACT_CLI}" can-i-deploy \
 		--pacticipant $(CONSUMER_NAME) \
 		--broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \
 		--broker-token ${PACT_BROKER_TOKEN} \
@@ -24,7 +25,7 @@ deploy_app:
 	@echo "Deploying to production"
 
 record_deployment:
-	@pact-broker record-deployment \
+	@"${PACT_CLI}" record-deployment \
 	 --pacticipant ${PACTICIPANT} \
 	 --version ${GIT_COMMIT} \
 	 --broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \

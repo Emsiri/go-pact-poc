@@ -25,9 +25,6 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: "*"
-      - name: Install
-        working-directory: ./consumer
-        run: make install
       - name: Test
         working-directory: ./consumer
         run: make consumer

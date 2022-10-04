@@ -10,9 +10,9 @@ install:
 run-provider:
 	@go run ${PWD}/cmd/usersvc/main.go
 
-deploy-provider: install
+deploy-provider:
 	@echo "--- ✅ Checking if we can deploy provider"
-	@pact-broker can-i-deploy \
+	@"${PACT_CLI}" can-i-deploy \
 		--pacticipant $(PROVIDER_NAME) \
 		--broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \
 		--broker-token ${PACT_BROKER_TOKEN} \
