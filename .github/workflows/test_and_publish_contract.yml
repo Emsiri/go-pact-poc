@@ -1,0 +1,33 @@
+name: Test and Publish Go Contract
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to use"
+        required: true
+        default: "master"
+        type: string
+
+env:
+  PACT_BROKER_BASE_URL: https://arkoselabs.pactflow.io
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  GIT_COMMIT: ${{ github.sha }}
+  GIT_REF: ${{ github.ref }}
+  PACT_PROVIDER: contract-testing-provider
+
+jobs:
+  test-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "*"
+      - name: Install
+        run: npm i
+      - name: Test
+        run: make consumer
+      - name: Publish pacts
+        run: make publish

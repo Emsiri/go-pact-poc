@@ -1,0 +1,28 @@
+name: Verify Go Changed Pact
+
+on:
+  repository_dispatch:
+    types:
+      - pact_changed
+
+env:
+  PACT_BROKER_BASE_URL: https://arkoselabs.pactflow.io
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  PACT_URL: ${{ github.event.client_payload.pact_url }}
+  PROVIDER_BASE_URL: https://gorest.co.in/public/v2
+  GIT_COMMIT: ${{ github.sha }}
+  GITHUB_REF: ${{ github.ref }}
+
+jobs:
+  verify-changed-pact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "12"
+      - run: docker pull pactfoundation/pact-cli:latest
+      - name: Install
+        run: npm i
+      - name: Test
+        run: make provider
