@@ -29,7 +29,7 @@ record_deployment:
 
 
 provider: export PACT_TEST := true
-provider: install
+provider:
 	@echo "--- 🔨Running Provider Pact tests "
 	go test -count=1 -tags=integration ${PWD} -run "TestPactProvider"
 
