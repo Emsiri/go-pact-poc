@@ -53,7 +53,7 @@ unit:
 
 consumer: export PACT_TEST := true
 consumer: install
-	@echo "--- Checking the go mock version"
-	pact-mock-service version
+	@echo "--- Checking the PATH"
+	@echo $PATH
 	@echo "--- 🔨Running Consumer Pact tests "
 	go test -tags=integration -count=1 ${PWD}/client -run 'TestClientPact'
