@@ -1,11 +1,17 @@
 PACTICIPANT="GoUserService"
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN  pactfoundation/pact-cli"
 
+deps:
+	@echo "--- 🐿  Fetching build dependencies "
+	cd /tmp; \
+	go install github.com/mitchellh/gox@latest; \
+	cd -
+
 install:
 	@if [ ! -d pact/bin ]; then\
-		echo "--- Installing Pact CLI dependencies";\
-		curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash;\
-    fi
+		echo "--- 🐿 Installing Pact CLI dependencies"; \
+		curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash -x; \
+  	fi
 
 run-consumer:
 	@go run client/cmd/main.go
@@ -47,5 +53,7 @@ unit:
 
 consumer: export PACT_TEST := true
 consumer: install
+	@echo "--- Checking the go mock version"
+	pact-mock-service version
 	@echo "--- 🔨Running Consumer Pact tests "
 	go test -tags=integration -count=1 ${PWD}/client -run 'TestClientPact'
