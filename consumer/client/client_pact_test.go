@@ -156,6 +156,7 @@ func createPact() dsl.Pact {
 		Provider: os.Getenv("PROVIDER_NAME"),
 		LogDir:   os.Getenv("LOG_DIR"),
 		PactDir:  os.Getenv("PACT_DIR"),
+		DisableToolValidityCheck: true,
 		LogLevel: "INFO",
 	}
 }

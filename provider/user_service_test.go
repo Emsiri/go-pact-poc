@@ -122,5 +122,6 @@ func createPact() dsl.Pact {
 		Provider: "GoUserService",
 		LogDir:   logDir,
 		LogLevel: "INFO",
+		DisableToolValidityCheck: true,
 	}
 }
