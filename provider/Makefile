@@ -12,7 +12,7 @@ run-provider:
 
 deploy-provider:
 	@echo "--- ✅ Checking if we can deploy provider"
-	@"${PACT_CLI}" can-i-deploy \
+	@"${PACT_CLI}" broker can-i-deploy \
 		--pacticipant $(PROVIDER_NAME) \
 		--broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \
 		--broker-token ${PACT_BROKER_TOKEN} \
