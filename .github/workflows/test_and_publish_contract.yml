@@ -21,13 +21,15 @@ jobs:
   test-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: configure go
+        uses: actions/setup-go@v3
         with:
           go-version: ">=1.17.0"
-      - run: go get github.com/pact-foundation/pact-go@v1
+        run: go get github.com/pact-foundation/pact-go@v1
       - name: check and set path
-      - run: |
+        run: |
           echo "$PATH"
           echo pact/bin >> $GITHUB_PATH
           echo "$HOME/pact/bin" >> $GITHUB_PATH
