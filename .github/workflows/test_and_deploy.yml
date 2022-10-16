@@ -32,7 +32,9 @@ jobs:
     needs: test
     steps:
       - run: docker pull pactfoundation/pact-cli:latest
+      - uses: actions/checkout@v3
       - name: Can I deploy?
+        working-directory: provider
         run: make deploy-provider
 
   deploy:

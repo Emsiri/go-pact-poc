@@ -38,9 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: check path
         run: echo "$PATH"
       - name: Test
+        working-directory: provider
         run: make consumer
       - name: Publish pacts
         run: make publish
