@@ -18,8 +18,19 @@ env:
   GIT_REF: ${{ github.ref }}
 
 jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ">=1.17.0"
+      - run: go version
+      - name: run go-get
+      - run: go get github.com/pact-foundation/pact-go@v1
   test:
     runs-on: ubuntu-latest
+    needs: install
     steps:
       - run: docker pull pactfoundation/pact-cli:latest
       - uses: actions/checkout@v2
