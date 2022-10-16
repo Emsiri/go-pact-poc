@@ -43,7 +43,7 @@ jobs:
       - name: check path
         run: echo "$PATH"
       - name: Test
-        working-directory: provider
+        working-directory: consumer
         run: make consumer
       - name: Publish pacts
         run: make publish
