@@ -53,7 +53,5 @@ unit:
 
 consumer: export PACT_TEST := true
 consumer: install
-	@echo "--- Checking the install"
-	pact-go instal
 	@echo "--- 🔨Running Consumer Pact tests "
 	go test -tags=integration -count=1 ${PWD}/client -run 'TestClientPact'
