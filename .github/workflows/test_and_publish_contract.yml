@@ -33,6 +33,7 @@ jobs:
         run: |
           echo "$PATH"
           echo "{pact/bin}" >> $GITHUB_PATH
+          echo "/github/workspace/pact/bin" >> $GITHUB_PATH
           echo "$HOME/.pact/bin" >> $GITHUB_PATH
   test-and-publish:
     runs-on: ubuntu-latest
