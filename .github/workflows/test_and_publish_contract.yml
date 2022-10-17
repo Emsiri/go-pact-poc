@@ -44,7 +44,11 @@ jobs:
       - name: check installation
         run: |
           ls -al
-          ./pact/bin/pact
+          cd ..
+          ls -al
+          cd pact/bin
+          ./pact-mock-service --help start
+          ./pact-provider-verifier --help verify
 
   test-and-publish:
     runs-on: ubuntu-latest
