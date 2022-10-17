@@ -52,6 +52,8 @@ jobs:
         env:
           CONSUMER_NAME: GoUserService
           PROVIDER_NAME: GoAdminService
+      - name: Check for pact files
+        run: ls -al
         run: make consumer
       - name: Publish pacts
         working-directory: consumer
