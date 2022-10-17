@@ -30,8 +30,12 @@ jobs:
       - name: Get pact with Go
         run: go get github.com/pact-foundation/pact-go@v1
       - name: install go-pact
-        working-directory: consumer
-        run: make install
+        run: |
+          curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.91.0/pact-1.91.0-linux-x86_64.tar.gz
+          tar xzf pact-1.91.0-linux-x86_64.tar.gz
+          cd pact/bin
+          ./pact-mock-service --help start
+          ./pact-provider-verifier --help verify
       - name: check and set path
         shell: bash
         run: |
@@ -41,13 +45,6 @@ jobs:
           echo "$HOME/pact/bin" >> $GITHUB_PATH
           echo "/github/workspace/pact/bin" >> $GITHUB_PATH
           echo "$HOME/.pact/bin" >> $GITHUB_PATH
-      - name: check installation
-        run: |
-          find / -type d -name "pact" 
-          ls -al
-          cd pact/bin
-          ./pact-mock-service --help start
-          ./pact-provider-verifier --help verify
 
   test-and-publish:
     runs-on: ubuntu-latest
