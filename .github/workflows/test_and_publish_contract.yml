@@ -55,7 +55,11 @@ jobs:
           PROVIDER_NAME: GoAdminService
         run: make consumer
       - name: Check for pact files
-        run: ls -al
+        run: |
+          cd consumer
+          ls -al
+          cd pacts
+          ls -al
       - name: Publish pacts
         working-directory: consumer
         env:
