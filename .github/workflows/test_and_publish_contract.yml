@@ -49,6 +49,9 @@ jobs:
           echo "$HOME/.pact/bin" >> $GITHUB_PATH
       - name: Test
         working-directory: consumer
+        env:
+          CONSUMER_NAME: GoUserService
+          PROVIDER_NAME: GoAdminService
         run: make consumer
       - name: Publish pacts
         run: make publish
