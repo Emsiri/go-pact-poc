@@ -52,6 +52,6 @@ unit:
 	go test -tags=unit -count=1 ${PWD}/client -run 'TestClientUnit'
 
 consumer: export PACT_TEST := true
-consumer: install
+consumer: 
 	@echo "--- 🔨Running Consumer Pact tests "
 	go test -tags=integration -count=1 ${PWD}/client -run 'TestClientPact'
