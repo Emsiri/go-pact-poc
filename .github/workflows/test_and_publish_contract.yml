@@ -57,6 +57,8 @@ jobs:
         run: ls -al
       - name: Can I deploy for consumer
         working-directory: consumer
+        env:
+          PACTICIPANT: "GoUserService"
         run: make deploy-consumer
       - name: Publish pacts
         working-directory: consumer
