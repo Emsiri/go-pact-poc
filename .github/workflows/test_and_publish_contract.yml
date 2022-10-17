@@ -43,8 +43,7 @@ jobs:
           echo "$HOME/.pact/bin" >> $GITHUB_PATH
       - name: check installation
         run: |
-          ls -al
-          cd ..
+          find / -type d -name "pact" 
           ls -al
           cd pact/bin
           ./pact-mock-service --help start
