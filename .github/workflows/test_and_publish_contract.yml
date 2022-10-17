@@ -54,4 +54,5 @@ jobs:
           PROVIDER_NAME: GoAdminService
         run: make consumer
       - name: Publish pacts
+        working-directory: consumer
         run: make publish
