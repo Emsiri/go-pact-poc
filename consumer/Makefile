@@ -19,7 +19,7 @@ run-consumer:
 deploy-consumer:
 	@echo "--- ✅ Checking if we can deploy consumer"
 	@"${PACT_CLI}" broker can-i-deploy \
-		--pacticipant $(CONSUMER_NAME) \
+		--pacticipant $(PACTICIPANT) \
 		--broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \
 		--broker-token ${PACT_BROKER_TOKEN} \
 		--latest
