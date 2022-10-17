@@ -33,6 +33,7 @@ jobs:
         run: |
           curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.91.0/pact-1.91.0-linux-x86_64.tar.gz
           tar xzf pact-1.91.0-linux-x86_64.tar.gz
+          ls -al
           cd pact/bin
           ./pact-mock-service --help start
           ./pact-provider-verifier --help verify
