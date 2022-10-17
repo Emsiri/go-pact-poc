@@ -55,6 +55,8 @@ jobs:
         run: make consumer
       - name: Check for pact files
         run: ls -al
+      - name: Can I deploy for consumer
+        run: make deploy-consumer
       - name: Publish pacts
         working-directory: consumer
         env:

@@ -18,7 +18,7 @@ run-consumer:
 
 deploy-consumer:
 	@echo "--- ✅ Checking if we can deploy consumer"
-	@"${PACT_CLI}" can-i-deploy \
+	@"${PACT_CLI}" broker can-i-deploy \
 		--pacticipant $(CONSUMER_NAME) \
 		--broker-base-url ${PACT_BROKER_PROTO}://$(PACT_BROKER_URL) \
 		--broker-token ${PACT_BROKER_TOKEN} \
@@ -38,7 +38,7 @@ record_deployment:
 	 --broker-token ${PACT_BROKER_TOKEN} \
 	 --environment production
 
-publish: install
+publish:
 	@echo "--- 📝 Publishing Pacts"
 	go run client/pact/publish.go
 	@echo
