@@ -35,6 +35,7 @@ jobs:
           tar xzf pact-1.91.0-linux-x86_64.tar.gz
           ls -al
           pwd
+          mkdir "${GITHUB_WORKSPACE}/consumer/pacts"
           cd pact/bin
           ./pact-mock-service --help start
           ./pact-provider-verifier --help verify
@@ -58,7 +59,7 @@ jobs:
       - name: Publish pacts
         working-directory: consumer
         env:
-          PACT_DIR: "${GITHUB_WORKSPACE}/pacts"
+          PACT_DIR: "${GITHUB_WORKSPACE}/consumer/pacts"
           PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
           PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
           PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
