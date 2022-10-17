@@ -56,6 +56,7 @@ jobs:
       - name: Check for pact files
         run: ls -al
       - name: Can I deploy for consumer
+        working-directory: consumer
         run: make deploy-consumer
       - name: Publish pacts
         working-directory: consumer
