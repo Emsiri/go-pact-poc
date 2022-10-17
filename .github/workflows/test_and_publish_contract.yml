@@ -59,6 +59,9 @@ jobs:
         working-directory: consumer
         env:
           PACTICIPANT: "GoUserService"
+          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
+          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
         run: make deploy-consumer
       - name: Publish pacts
         working-directory: consumer

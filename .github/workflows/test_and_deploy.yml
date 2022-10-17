@@ -35,6 +35,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Can I deploy?
         working-directory: provider
+        env:
+          PACTICIPANT: "GoUserService"
+          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
+          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
         run: make deploy-provider
 
   deploy:
@@ -44,4 +49,9 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker pull pactfoundation/pact-cli:latest
       - name: Deploy
+        env:
+          PACTICIPANT: "GoUserService"
+          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
+          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
         run: make deploy
