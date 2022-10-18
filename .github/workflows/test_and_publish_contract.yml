@@ -61,6 +61,7 @@ jobs:
           cd consumer
           ls -al
           cd pacts
+          pwd
           ls -al
       - name: Publish pacts
         working-directory: consumer
