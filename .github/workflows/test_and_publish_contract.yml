@@ -55,8 +55,8 @@ jobs:
         run: make consumer
       - name: Check for pact files
         run: |
-          echo "${GITHUB_WORKSPACE}/consumer"
           echo ${GITHUB_WORKSPACE}/consumer
+          echo ${{ runner.workspace }}/consumer
           cd consumer
           ls -al
           cd pacts
@@ -64,7 +64,7 @@ jobs:
       - name: Publish pacts
         working-directory: consumer
         env:
-          PACT_DIR: "${GITHUB_WORKSPACE}/consumer/pacts"
+          PACT_DIR: "{{ runner.workspace }}/consumer/pacts"
           PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
           PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
           PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
