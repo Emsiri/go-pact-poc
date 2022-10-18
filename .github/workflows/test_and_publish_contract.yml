@@ -35,7 +35,6 @@ jobs:
           tar xzf pact-1.91.0-linux-x86_64.tar.gz
           ls -al
           pwd
-          mkdir "${GITHUB_WORKSPACE}/consumer/pacts"
           cd pact/bin
           ./pact-mock-service --help start
           ./pact-provider-verifier --help verify
@@ -56,6 +55,8 @@ jobs:
         run: make consumer
       - name: Check for pact files
         run: |
+          echo "${GITHUB_WORKSPACE}/consumer"
+          echo ${GITHUB_WORKSPACE}/consumer
           cd consumer
           ls -al
           cd pacts
