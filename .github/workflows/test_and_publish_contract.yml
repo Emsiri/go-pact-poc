@@ -18,8 +18,8 @@ env:
   PACT_DIR: ${{ github.workspace }}/pacts
   PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
   PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
-  CONSUMER_NAME: GoUserService
-  PROVIDER_NAME: GoAdminService
+  CONSUMER_NAME: GoAdminService
+  PROVIDER_NAME: GoUserService
   LOG_DIR: ${{ github.workspace }}/consumer/log
   PACTICIPANT: "GoAdminService"
 
