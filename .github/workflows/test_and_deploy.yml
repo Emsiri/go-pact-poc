@@ -12,10 +12,15 @@ on:
 
 env:
   PACT_BROKER_BASE_URL: https://arkoselabs.pactflow.io
-  PROVIDER_BASE_URL: https://gorest.co.in/public/v2
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
   GIT_REF: ${{ github.ref }}
+  PACT_DIR: ${{ github.workspace }}/consumer/pacts
+  PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
+  PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+  CONSUMER_NAME: GoUserService
+  PROVIDER_NAME: GoAdminService
+  LOG_DIR: ${{ github.workspace }}/consumer/log
 
 jobs:
   test:
@@ -36,10 +41,7 @@ jobs:
       - name: Can I deploy?
         working-directory: provider
         env:
-          PACTICIPANT: "GoUserService"
-          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
-          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
-          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+          PACTICIPANT: "GoAdminService"
         run: make deploy-provider
 
   deploy:
@@ -50,8 +52,5 @@ jobs:
       - run: docker pull pactfoundation/pact-cli:latest
       - name: Deploy
         env:
-          PACTICIPANT: "GoUserService"
-          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
-          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
-          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+          PACTICIPANT: "GoAdminService"
         run: make deploy
