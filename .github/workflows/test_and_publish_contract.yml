@@ -59,12 +59,10 @@ jobs:
         run: make consumer
       - name: Check for pact files
         run: |
-          echo ${{ github.workspace }}/consumer
-          echo ${{ runner.workspace }}/consumer
-          cd consumer
+          ls -al
+          cd pacts
           ls -al
           pwd
-          ls -al
       - name: Publish pacts
         working-directory: consumer
         run: make publish
