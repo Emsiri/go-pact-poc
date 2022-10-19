@@ -15,7 +15,12 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
   GIT_REF: ${{ github.ref }}
-  PACT_PROVIDER: contract-testing-provider
+  PACT_DIR: "${{ GITHUB_WORKSPACE }}/consumer/pacts"
+  PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
+  PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  CONSUMER_NAME: GoUserService
+  PROVIDER_NAME: GoAdminService
 
 jobs:
   test-and-publish:
@@ -50,13 +55,10 @@ jobs:
           echo "$HOME/.pact/bin" >> $GITHUB_PATH
       - name: Test
         working-directory: consumer
-        env:
-          CONSUMER_NAME: GoUserService
-          PROVIDER_NAME: GoAdminService
         run: make consumer
       - name: Check for pact files
         run: |
-          echo ${GITHUB_WORKSPACE}/consumer
+          echo ${{ GITHUB_WORKSPACE }}/consumer
           echo ${{ runner.workspace }}/consumer
           cd consumer
           ls -al
@@ -65,9 +67,4 @@ jobs:
           ls -al
       - name: Publish pacts
         working-directory: consumer
-        env:
-          PACT_DIR: "{{ runner.workspace }}/consumer/pacts"
-          PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
-          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
-          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
         run: make publish
