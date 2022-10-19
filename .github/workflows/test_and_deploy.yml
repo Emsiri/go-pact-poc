@@ -15,12 +15,13 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
   GIT_REF: ${{ github.ref }}
-  PACT_DIR: ${{ github.workspace }}/consumer/pacts
+  PACT_DIR: ${{ github.workspace }}/pacts
   PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
   PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
   CONSUMER_NAME: GoUserService
   PROVIDER_NAME: GoAdminService
-  LOG_DIR: ${{ github.workspace }}/consumer/log
+  LOG_DIR: ${{ github.workspace }}/provider/log
+  PACTICIPANT: "GoUserService"
 
 jobs:
   test:
@@ -40,8 +41,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Can I deploy?
         working-directory: provider
-        env:
-          PACTICIPANT: "GoAdminService"
         run: make deploy-provider
 
   deploy:
@@ -51,6 +50,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker pull pactfoundation/pact-cli:latest
       - name: Deploy
-        env:
-          PACTICIPANT: "GoAdminService"
         run: make deploy

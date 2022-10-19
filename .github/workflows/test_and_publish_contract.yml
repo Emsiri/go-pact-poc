@@ -15,12 +15,13 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
   GIT_REF: ${{ github.ref }}
-  PACT_DIR: ${{ github.workspace }}/consumer/pacts
+  PACT_DIR: ${{ github.workspace }}/pacts
   PACT_BROKER_PROTO: ${{ secrets.PACT_BROKER_PROTO }}
   PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
   CONSUMER_NAME: GoUserService
   PROVIDER_NAME: GoAdminService
   LOG_DIR: ${{ github.workspace }}/consumer/log
+  PACTICIPANT: "GoAdminService"
 
 jobs:
   test-and-publish:
@@ -40,7 +41,7 @@ jobs:
           tar xzf pact-1.91.0-linux-x86_64.tar.gz
           ls -al
           pwd
-          mkdir "${GITHUB_WORKSPACE}/consumer/pacts"
+          mkdir "${GITHUB_WORKSPACE}/pacts"
           cd pact/bin
           ./pact-mock-service --help start
           ./pact-provider-verifier --help verify
@@ -62,7 +63,6 @@ jobs:
           echo ${{ runner.workspace }}/consumer
           cd consumer
           ls -al
-          cd pacts
           pwd
           ls -al
       - name: Publish pacts
