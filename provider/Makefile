@@ -25,7 +25,7 @@ deploy_app:
 	@echo "Deploying to production"
 
 record_deployment:
-	@"${PACT_CLI}" broker record-deployment --pacticipant ${PACTICIPANT} --version ${GIT_COMMIT} --environment production
+	@"${PACT_CLI}" broker record-deployment --pacticipant ${PACTICIPANT} --version 1.0.0 --environment production
 
 
 provider: export PACT_TEST := true
