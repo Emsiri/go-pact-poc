@@ -30,3 +30,4 @@ consumer/pact
 consumer/pacts
 provider/pact
 provider/pacts
+pacts/
