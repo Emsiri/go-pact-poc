@@ -22,8 +22,6 @@ env:
   PROVIDER_NAME: GoUserService
   LOG_DIR: ${{ github.workspace }}/provider/log
   PACTICIPANT: "GoUserService"
-  GIT_COMMIT: ${{ github.sha }}
-  GITHUB_REF: ${{ github.ref }}
 
 jobs:
   test:
