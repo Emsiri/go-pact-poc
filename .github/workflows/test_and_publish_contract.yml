@@ -39,8 +39,6 @@ jobs:
         run: |
           curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.91.0/pact-1.91.0-linux-x86_64.tar.gz
           tar xzf pact-1.91.0-linux-x86_64.tar.gz
-          ls -al
-          pwd
           mkdir "${GITHUB_WORKSPACE}/pacts"
           cd pact/bin
           ./pact-mock-service --help start
@@ -48,7 +46,6 @@ jobs:
       - name: check and set path
         shell: bash
         run: |
-          echo "$PATH"
           echo "${{github.workspace}}/pact/bin" >> $GITHUB_PATH
           echo "$GITHUB_WORKSPACE/pact/bin" >> $GITHUB_PATH
           echo "$HOME/pact/bin" >> $GITHUB_PATH
